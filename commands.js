@@ -1,23 +1,9 @@
 import 'dotenv/config';
-import { getRPSChoices } from './scripts/game.js';
-import { capitalize, InstallGlobalCommands } from './scripts/utils.js';
+import { InstallGlobalCommands } from './scripts/utils.js';
+import ATK_COMMAND from './scripts/constants/commandConstants.js';
 
 // import { enemies } from './resources/Enemies.js';
 
-// Get the game choices from game.js
-// function createCommandChoices() {
-//   const choices = getRPSChoices();
-//   const commandChoices = [];
-
-//   for (let choice of choices) {
-//     commandChoices.push({
-//       name: capitalize(choice),
-//       value: choice.toLowerCase(),
-//     });
-//   }
-
-//   return commandChoices;
-// }
 
 // const TEST_COMMAND = {
 //   name: 'test',
@@ -44,7 +30,7 @@ import { capitalize, InstallGlobalCommands } from './scripts/utils.js';
 // };
 
 const ATK_COMMAND = {
-  name: 'atk',
+  name: ATK_COMMANDNAME,
   description: 'Attack an opponent',
   options: [
     {
@@ -54,7 +40,6 @@ const ATK_COMMAND = {
       required: true,
       min_value: 0,
       max_value: 100,
-      // choices: createCommandChoices(),
     },
   ],
   type: 1,

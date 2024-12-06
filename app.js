@@ -9,7 +9,8 @@ import { getRandomEmoji } from './scripts/utils.js';
 
 import { attack, beginFight, endFight } from './scripts/combat.js';
 import { getAtkMessageComponent, beginFightMessageComponent } from './scripts/messageComponents.js';
-import STARTFIGHT_SELECTEDATTENDEES, { ATK_ENEMYSELECTION, ATK_SUBMIT } from './scripts/constants.js';
+import STARTFIGHT_SELECTEDATTENDEES, { ATK_ENEMYSELECTION, ATK_SUBMIT } from './scripts/constants/constants.js';
+import ATK_COMMANDNAME from './scripts/constants/commandConstants.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -88,9 +89,14 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       });
     }
 
-    if (name === 'atk') {
+    if (name === ATK_COMMANDNAME) {
       console.log("ATK received, sending back msg with atkMessageComponent");
-      // const result = attack();
+
+      const { name, options } = data;
+      const atkValue = +options[0] // dice amount
+
+      // monsterdv, difficulty, atkVal-result
+      const result = attack();
 
       const atkMsgComp = await getAtkMessageComponent();
 
@@ -123,7 +129,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
 
     if (custom_id.startsWith("Atk_")) {
       if (custom_id !== ATK_SUBMIT) {
-        // only handle submit, ignore the rest by sending ACK
+        // only handle submit, ignore the rest by sending ACK // update: needs to save state
         return res.send({ type: InteractionResponseType.DEFERRED_UPDATE_MESSAGE });      
       }
 
