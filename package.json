@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "npx tsx app.ts",
-    "register": "npx tsx commands.ts"
+    "register": "npx tsx commands.ts",
+    "lint": "npx eslint"
   },
   "author": "Luca Camastro",
   "license": "MIT",
