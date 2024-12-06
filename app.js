@@ -5,8 +5,7 @@ import {
   InteractionResponseType,
   verifyKeyMiddleware,
 } from 'discord-interactions';
-import { ATK_SUBMIT } from './scripts/constants/constants.js';
-import { handleCommand, getCommandSendObject } from './scripts/handler/commandHandler.js';
+import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,35 +20,14 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
   }
 
   if (type === InteractionType.APPLICATION_COMMAND) {
-    const command = data.name;
-    const options = data.options;
-
-    handleCommand(command, options);
-    sendObj = getCommandSendObject(command, options);
-
+    handleApplicationCommand(data.name, data.options);
+    sendObj = getCommandSendObject(data.name, data.options);
   }
 
   if (type === InteractionType.MESSAGE_COMPONENT) {
-    const { component_type, custom_id } = data;
-
-    if (custom_id.startsWith("Atk_")) {
-      if (custom_id !== ATK_SUBMIT) {
-        return res.send({ type: InteractionResponseType.DEFERRED_UPDATE_MESSAGE });      
-      }
-
-      if (custom_id === ATK_SUBMIT) {
-        // TODO: handle submit atk
-        return res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: {
-            content: `Atk-Informationen erfolgreich angekommen`,
-          },
-        });
-      }
-
-    }
+    handleMessageComponent(data.custom_id, data.component_type);
+    sendObj = getMessageComponentSendObj(data.custom_id, data.component_type);
   }
-
 
   if (sendObj) {
     return res.send(sendObj);
@@ -58,8 +36,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
     console.error(errorMsg);
     return res.status(400).json({ error: errorMsg });
   }
-
-  
 });
 
 app.listen(PORT, () => {

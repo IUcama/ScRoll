@@ -2,17 +2,6 @@ import 'dotenv/config';
 import { InstallGlobalCommands } from './scripts/utils.js';
 import { COMMAND } from './scripts/constants/commandConstants.js';
 
-// import { enemies } from './resources/Enemies.js';
-
-
-// const TEST_COMMAND = {
-//   name: 'test',
-//   description: 'Basic command',
-//   type: 1,
-//   integration_types: [0, 1],
-//   contexts: [0, 1, 2],
-// };
-
 // const BEGIN_FIGHT_COMMAND = {
 //   name: 'beginfight',
 //   description: 'begin a new fight',
@@ -50,7 +39,6 @@ const ATK_COMMAND = {
 
 InstallGlobalCommands(process.env.APP_ID, 
   [
-    // TEST_COMMAND, 
     // BEGIN_FIGHT_COMMAND,
     // END_FIGHT_COMMAND,
     ATK_COMMAND,
