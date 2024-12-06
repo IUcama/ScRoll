@@ -5,14 +5,29 @@ import {
   InteractionResponseType,
   verifyKeyMiddleware,
 } from 'discord-interactions';
-import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler.js';
+import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler';
+import { SessionHandler } from './scripts/handler/sessionHandler'
+import session from 'express-session';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(session({
+  secret: process.env.SESSION_SECRET!,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    maxAge: 28800000, // 8h
+    secure: true 
+  } 
+}));
+
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async function (req, res) {
 
   const { type, data } = req.body;
+  // req.session.test = "TestSessionEntry";
+  SessionHandler.setSession(req.session);
+  
   let sendObj: unknown = null;
 
   if (type === InteractionType.PING) {

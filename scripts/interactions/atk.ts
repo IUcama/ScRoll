@@ -1,7 +1,10 @@
 import { ATK_DIFFICULTY, ATK_ENEMYSELECTION, ATK_SUBMIT, ATK_VALUE } from "../constants/constants";
+// import SessionHandler from "../handler/sessionHandler";
 
 
 export const handleAtkMessageComponent = (custom_id: unknown) => {
+    // const session = SessionHandler.getSession();
+    
     switch (custom_id) {
         case ATK_VALUE:
             // save atk_val
