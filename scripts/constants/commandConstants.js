@@ -1,5 +1,6 @@
 
-export const ATK_COMMANDNAME = "atkcommand";
+export const COMMAND = {
+    ATK: "atk",
+}
 
-
-export default ATK_COMMANDNAME;
+export default COMMAND;

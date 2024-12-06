@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { InstallGlobalCommands } from './scripts/utils.js';
-import ATK_COMMAND from './scripts/constants/commandConstants.js';
+import { COMMAND } from './scripts/constants/commandConstants.js';
 
 // import { enemies } from './resources/Enemies.js';
 
@@ -30,7 +30,7 @@ import ATK_COMMAND from './scripts/constants/commandConstants.js';
 // };
 
 const ATK_COMMAND = {
-  name: ATK_COMMANDNAME,
+  name: COMMAND.ATK,
   description: 'Attack an opponent',
   options: [
     {

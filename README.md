@@ -77,7 +77,7 @@ If you aren't following the [getting started guide](https://discord.com/develope
 
 The project needs a public endpoint where Discord can send requests. To develop and test locally, you can use something like [`ngrok`](https://ngrok.com/) to tunnel HTTP traffic.
 
-Install ngrok if you haven't already, then start listening on port `3000`:
+Install ngrok if you haven't already, then start listening on port `3000`. Start ngrok.exe with:
 
 ```
 ngrok http 3000

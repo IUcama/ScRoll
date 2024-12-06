@@ -51,7 +51,7 @@ export const beginFightMessageComponent = {
 
 
 
-export async function getAtkMessageComponent() {
+export function getAtkMessageComponent() {
 
     let enemyList = enemies.map(e => { 
             const obj = {};
