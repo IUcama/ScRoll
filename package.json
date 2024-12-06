@@ -1,7 +1,7 @@
 {
   "name": "sc-roll",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ScRoll, a discord scion1e combat tool",
   "main": "app.js",
   "type": "module",
@@ -9,9 +9,8 @@
     "node": ">=18.x"
   },
   "scripts": {
-    "start": "node app.js",
-    "register": "node commands.js",
-    "dev": "nodemon app.js"
+    "start": "npx tsx app.ts",
+    "register": "npx tsx commands.ts"
   },
   "author": "Luca Camastro",
   "license": "MIT",
@@ -19,9 +18,10 @@
     "@discord/embedded-app-sdk": "^1.7.0",
     "discord-interactions": "^4.0.0",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.0"
+    "tsx": "^4.19.2"
   }
 }

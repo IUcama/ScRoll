@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ATK_SUBMIT = exports.ATK_DIFFICULTY = exports.ATK_ENEMYSELECTION = exports.ATK_VALUE = exports.ATK_PREFIX = exports.STARTFIGHT_ENEMYSELECTION = exports.STARTFIGHT_USERSELECTION = exports.STARTFIGHT_SELECTEDATTENDEES = void 0;
+exports.STARTFIGHT_SELECTEDATTENDEES = "StartFight_SelectedAttendees";
+exports.STARTFIGHT_USERSELECTION = "StartFight_UserSelection";
+exports.STARTFIGHT_ENEMYSELECTION = "StartFight_EnemySelection";
+exports.ATK_PREFIX = "Atk_";
+exports.ATK_VALUE = `${exports.ATK_PREFIX}Value`;
+exports.ATK_ENEMYSELECTION = `${exports.ATK_PREFIX}EnemySelection`;
+exports.ATK_DIFFICULTY = `${exports.ATK_PREFIX}Difficulty`;
+exports.ATK_SUBMIT = `${exports.ATK_PREFIX}Submit`;
+exports.default = exports.STARTFIGHT_SELECTEDATTENDEES;
