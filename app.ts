@@ -10,23 +10,25 @@ import { handleApplicationCommand, handleMessageComponent, getCommandSendObject,
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async function (req, res) {
+app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async function (req, res) {
 
   const { type, data } = req.body;
-  let sendObj: any = null;
+  let sendObj: unknown = null;
 
   if (type === InteractionType.PING) {
     return res.send({ type: InteractionResponseType.PONG });
   }
 
   if (type === InteractionType.APPLICATION_COMMAND) {
-    handleApplicationCommand(data.name, data.options);
-    sendObj = getCommandSendObject(data.name, data.options);
+    // data.options
+    handleApplicationCommand(data.name);
+    sendObj = getCommandSendObject(data.name);
   }
 
   if (type === InteractionType.MESSAGE_COMPONENT) {
-    handleMessageComponent(data.custom_id, data.component_type);
-    sendObj = getMessageComponentSendObj(data.custom_id, data.component_type);
+    // data.component_type
+    handleMessageComponent(data.custom_id);
+    sendObj = getMessageComponentSendObj(data.custom_id);
   }
 
   if (sendObj) {

@@ -2,16 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Start Bot",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "program": "${workspaceFolder}\\app.ts",
+            "runtimeExecutable": "tsx",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
             "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\commands.ts",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
+                "<node_internals>/**",
+                "${workspaceFolder}/node_modules/**",
             ]
         }
     ]

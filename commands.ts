@@ -1,6 +1,6 @@
 import 'dotenv/config';
-import { InstallGlobalCommands } from './scripts/utils.js';
-import { COMMAND } from './scripts/constants/commandConstants.js';
+import { InstallGlobalCommands } from './scripts/utils.ts';
+import { COMMAND } from './scripts/constants/commandConstants.ts';
 
 // const BEGIN_FIGHT_COMMAND = {
 //   name: 'beginfight',

@@ -1,8 +1,11 @@
-import { STARTFIGHT_SELECTEDATTENDEES, STARTFIGHT_USERSELECTION, ATK_ENEMYSELECTION, ATK_DIFFICULTY, ATK_SUBMIT } from "./constants/constants";
-import { enemies } from "../options/enemies.js";
-import { difficultyList } from "../options/difficulty.js";
-
-export const beginFightMessageComponent = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.beginFightMessageComponent = void 0;
+exports.getAtkMessageComponent = getAtkMessageComponent;
+const constants_1 = require("./constants/constants");
+const enemies_js_1 = require("../options/enemies.js");
+const difficulty_js_1 = require("../options/difficulty.js");
+exports.beginFightMessageComponent = {
     "content": "This is a message with components",
     "components": [
         {
@@ -10,12 +13,11 @@ export const beginFightMessageComponent = {
             "components": [
                 {
                     "type": 5,
-                    "custom_id": STARTFIGHT_USERSELECTION,
+                    "custom_id": constants_1.STARTFIGHT_USERSELECTION,
                     "min_values": 1,
                     "max_values": 10
                 },
             ]
-
         },
         // {
         //     "type": 1,
@@ -32,7 +34,6 @@ export const beginFightMessageComponent = {
         //             "max_values": 10
         //         },
         //     ]
-
         // },
         {
             "type": 1,
@@ -41,25 +42,19 @@ export const beginFightMessageComponent = {
                     "type": 2,
                     "label": "Annehmen",
                     "style": 1,
-                    "custom_id": STARTFIGHT_SELECTEDATTENDEES
+                    "custom_id": constants_1.STARTFIGHT_SELECTEDATTENDEES
                 }
             ]
-
         }
     ]
 };
-
-
-
-export function getAtkMessageComponent() {
-
-    const enemyList = enemies.map(e => { 
-            const obj = {};
-            obj["label"] = `${e.label}`;
-            obj["value"] = `${e.label.toLowerCase()}`;
+function getAtkMessageComponent() {
+    const enemyList = enemies_js_1.enemies.map(e => {
+        const obj = {};
+        obj["label"] = `${e.label}`;
+        obj["value"] = `${e.label.toLowerCase()}`;
         return obj;
-    })
-
+    });
     return {
         "content": "Gib die ensprechenden Informationen für den Angriff an.",
         "components": [
@@ -68,7 +63,7 @@ export function getAtkMessageComponent() {
                 "components": [
                     {
                         "type": 3,
-                        "custom_id": ATK_ENEMYSELECTION,
+                        "custom_id": constants_1.ATK_ENEMYSELECTION,
                         "options": enemyList,
                         "placeholder": "Wähle einen Gegner",
                         "min_values": 1,
@@ -81,8 +76,8 @@ export function getAtkMessageComponent() {
                 "components": [
                     {
                         "type": 3,
-                        "custom_id": ATK_DIFFICULTY,
-                        "options": difficultyList,
+                        "custom_id": constants_1.ATK_DIFFICULTY,
+                        "options": difficulty_js_1.difficultyList,
                         "placeholder": "Schwierigkeit",
                         // "min_values": 1,
                         // "max_values": 1
@@ -96,7 +91,7 @@ export function getAtkMessageComponent() {
                         "type": 2,
                         "label": "Bestätigen",
                         "style": 1,
-                        "custom_id": ATK_SUBMIT
+                        "custom_id": constants_1.ATK_SUBMIT
                     }
                 ]
             },

@@ -1,6 +1,7 @@
-import { ATK_DIFFICULTY, ATK_ENEMYSELECTION, ATK_SUBMIT, ATK_VALUE } from "../constants/constants.js";
+import { ATK_DIFFICULTY, ATK_ENEMYSELECTION, ATK_SUBMIT, ATK_VALUE } from "../constants/constants";
 
-export const handleAtkMessageComponent = (custom_id, component_type) => {
+
+export const handleAtkMessageComponent = (custom_id: unknown) => {
     switch (custom_id) {
         case ATK_VALUE:
             // save atk_val
