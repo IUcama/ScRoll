@@ -23,21 +23,10 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         const atkModel = await AtkModel.findOne();
         if (atkModel) {
             atkModel[custom_id] = dataToSave;
-            atkModel.save().then((res) => {
-                console.log("saved?", res)
-            });
-            console.log(atkModel.Atk_Difficulty);
-            console.log(atkModel.Atk_EnemySelection);
-            console.log(atkModel.Atk_Value);
+            atkModel.save();
         } else {
-            const newAtkModel = new AtkModel({
-                [custom_id]: values
-            });
-            console.log(newAtkModel);
-            newAtkModel.save().then((res) => {
-                console.log("saved2?", res)
-            });
+            const newAtkModel = new AtkModel({[custom_id]: values});
+            newAtkModel.save();
         }
-        // AtkModel
     }
 }

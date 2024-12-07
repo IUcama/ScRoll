@@ -1,13 +1,26 @@
 import { COMMAND } from "../constants/commandConstants.js";
 import { InteractionResponseType } from 'discord-interactions';
 import { getAtkMessageComponent } from "../messageComponents";
-import { ATK_PREFIX, ATK_SUBMIT } from "../constants/constants";
+import { ATK_DIFFICULTY, ATK_PREFIX, ATK_SUBMIT } from "../constants/constants";
 import { handleAtkMessageComponent } from "../interactions/atk";
-// import SessionHandler from "./sessionHandler.js";
+import AtkModel from "../../mongodb/schema/atkSchema.js";
 
-export const handleApplicationCommand = (command: unknown) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const handleApplicationCommand = (command: unknown, options: any) => {
     switch (command) {
         case COMMAND.ATK: 
+        // options
+
+        AtkModel.findOneAndUpdate({}, { [ATK_DIFFICULTY]: options[0].value });
+
+        // const atkModel = await AtkModel.findOne();
+        // if (atkModel) {
+        //     atkModel[custom_id] = dataToSave;
+        //     atkModel.save();
+        // } else {
+        //     const newAtkModel = new AtkModel({[custom_id]: values});
+        //     newAtkModel.save();
+        // }
         //    saveAtkValue(+options[0]);
         // monsterdv, difficulty, atkVal-result
         break;
