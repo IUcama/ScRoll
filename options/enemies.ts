@@ -1,5 +1,6 @@
 export const enemies = [
     {
+        "id": "troll",
         "label": "Troll",
         "joinBattle": 6,
         "accuracy": 10,
@@ -36,6 +37,7 @@ export const enemies = [
         ],
     },
     {
+        "id": "riese",
         "label": "Riese",
         "joinBattle": 6,
         "accuracy": 10,
@@ -72,6 +74,7 @@ export const enemies = [
         ]
     },
     {
+        "id": "lempo",
         "label": "Lempo",
         "joinBattle": 6,
         "accuracy": 10,
