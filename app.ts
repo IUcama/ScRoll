@@ -6,28 +6,35 @@ import {
   verifyKeyMiddleware,
 } from 'discord-interactions';
 import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler';
-import { SessionHandler } from './scripts/handler/sessionHandler'
-import session from 'express-session';
+// import { SessionHandler } from './scripts/handler/sessionHandler'
+import mongoose from 'mongoose';
+// import session from 'express-session';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(session({
-  secret: process.env.SESSION_SECRET!,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { 
-    maxAge: 28800000, // 8h
-    secure: true 
-  } 
-}));
+// app.use(session({
+//   secret: process.env.SESSION_SECRET!,
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: {
+//     maxAge: 28800000, // 8h
+//     // secure: true
+//   }
+// }));
+
+mongoose.connect('mongodb://localhost/scRoll', {
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log(err));
 
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async function (req, res) {
 
+  // SessionHandler.setSession(req.session);
   const { type, data } = req.body;
-  // req.session.test = "TestSessionEntry";
-  SessionHandler.setSession(req.session);
-  
+
   let sendObj: unknown = null;
 
   if (type === InteractionType.PING) {
@@ -42,9 +49,12 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async fu
 
   if (type === InteractionType.MESSAGE_COMPONENT) {
     // data.component_type
-    handleMessageComponent(data.custom_id);
+    handleMessageComponent(data.custom_id, data.values);
     sendObj = getMessageComponentSendObj(data.custom_id);
   }
+
+  // req.session = SessionHandler.getSession();
+  // req.session.save();
 
   if (sendObj) {
     return res.send(sendObj);

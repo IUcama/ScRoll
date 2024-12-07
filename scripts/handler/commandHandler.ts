@@ -3,6 +3,7 @@ import { InteractionResponseType } from 'discord-interactions';
 import { getAtkMessageComponent } from "../messageComponents";
 import { ATK_PREFIX, ATK_SUBMIT } from "../constants/constants";
 import { handleAtkMessageComponent } from "../interactions/atk";
+// import SessionHandler from "./sessionHandler.js";
 
 export const handleApplicationCommand = (command: unknown) => {
     switch (command) {
@@ -13,10 +14,10 @@ export const handleApplicationCommand = (command: unknown) => {
     }
 }
 
-export const handleMessageComponent = (custom_id: string) => {
+export const handleMessageComponent = (custom_id: string, values: string[]) => {
 
     if (custom_id.startsWith(ATK_PREFIX)) {
-        handleAtkMessageComponent(custom_id);
+        handleAtkMessageComponent(custom_id, values);
     }    
 }
 
@@ -31,11 +32,14 @@ export const getCommandSendObject = (command: unknown) => {
 }
 
 export const getMessageComponentSendObj = (custom_id: unknown) => {
+    // const session = SessionHandler.getSession();
     switch (custom_id) {
         case ATK_SUBMIT: 
+        // console.log(SessionHandler.getSession());
             return {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-                data: { content: `Atk-Informationen erfolgreich angekommen` },
+                data: { content: 
+                    `Atk-Informationen erfolgreich angekommen` },
             };
         default: return { type: InteractionResponseType.DEFERRED_UPDATE_MESSAGE };
         }
