@@ -1,4 +1,4 @@
-import { STARTFIGHT_SELECTEDATTENDEES, STARTFIGHT_USERSELECTION, ATK_ENEMYSELECTION, ATK_DIFFICULTY, ATK_SUBMIT } from "./constants/constants";
+import { STARTFIGHT_SELECTEDATTENDEES, STARTFIGHT_USERSELECTION, ATK_ENEMYSELECTION, ATK_DIFFICULTY, ATK_SUBMIT } from "./constants/constants.js";
 import { enemies } from "../options/enemies.js";
 import { difficultyList } from "../options/difficulty.js";
 

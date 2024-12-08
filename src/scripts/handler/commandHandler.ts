@@ -1,10 +1,9 @@
 import { COMMAND } from "../constants/commandConstants.js";
 import { InteractionResponseType } from 'discord-interactions';
-import { getAtkMessageComponent } from "../messageComponents";
-import { ATK_PREFIX, ATK_SUBMIT, ATK_VALUE } from "../constants/constants";
-import { handleAtkMessageComponent } from "../interactions/atk";
+import { getAtkMessageComponent } from "../messageComponents.js";
+import { ATK_PREFIX, ATK_SUBMIT, ATK_VALUE } from "../constants/constants.js";
+import { handleAtkMessageComponent } from "../interactions/atk.js";
 import AtkModel from "../../mongodb/schema/atkSchema.js";
-// import { AtkResult } from "../types/AtkResult.js";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleApplicationCommand = (command: unknown, options: any) => {

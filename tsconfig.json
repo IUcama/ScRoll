@@ -10,6 +10,6 @@
     },
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Recommended",
-    "include": ["scripts/**/*"],
+    "include": ["src/scripts/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts", "dist"]
   }

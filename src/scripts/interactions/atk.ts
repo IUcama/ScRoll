@@ -2,7 +2,7 @@ import { ATK_DIFFICULTY, ATK_ENEMYSELECTION, ATK_SUBMIT, ATK_VALUE } from "../co
 import AtkModel from '../../mongodb/schema/atkSchema'
 import { enemies } from "../../options/enemies";
 
-export const handleAtkMessageComponent = async (custom_id: string, values: string[]): Promise<string> => {
+export const handleAtkMessageComponent = async (custom_id: string, values: string[]): Promise<string | undefined> => {
 
     if (custom_id === ATK_SUBMIT) {
         // TODO: handle submit
@@ -36,13 +36,15 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         // calc if hit or miss against the enemy
 
         // TODO: check for parryDV also
-        const hit = successes - (enemy!.dodgeDV + difficulty) > 0;
+        const hitValue = successes - (enemy!.dodgeDV + difficulty);
+        const hit = hitValue > 0;
 
         console.log("ATK-Calculation DEBUG VALUES");
         console.log("difficulty", difficulty);
         console.log("enemy!.dodgeDV", enemy!.dodgeDV);
         console.log("rollResults", rollResults);
         console.log("successes", successes);
+        console.log("hitValue", hitValue);
         console.log("hit", hit);
 
         // todo: now clear db again?
@@ -51,12 +53,14 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         // show/return to user the roll result + calcResult
         // return { hit, successes, rollResults } as AtkResult;
         const hitText = hit ? "getroffen" : "verfehlt";
+        const hitExtraSuccesses = hitValue > 0 ? hitValue : "Keine";
         const returnText = 
         `
         Würfel-Ergebnis: ${rollResults}
         Erfolge: ${successes}
         
         Du hast ${hitText}!
+        ${hitExtraSuccesses} überschüssige Erfolge
         `;
 
         return returnText;

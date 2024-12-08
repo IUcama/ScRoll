@@ -5,7 +5,7 @@
             "name": "Start Bot",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}\\app.ts",
+            "program": "${workspaceFolder}\\src\\app.ts",
             "runtimeExecutable": "tsx",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
