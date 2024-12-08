@@ -2,7 +2,7 @@ import { DiceEnum } from "../enums/diceEnum";
 import { DiceResult } from "../types/DiceResult";
 
 export const roll = (amount: number, diceType: DiceEnum = DiceEnum.D10): DiceResult => {
-    const diceResult: DiceResult = { rolls: [], successes: 0 };
+    const diceResult: DiceResult = { rolls: [], successes: 0, diceType };
 
     for (let i = 0; i < amount; i++) {
         const rollResult = Math.floor((Math.random() * diceType) + 1);
@@ -35,11 +35,13 @@ const calculateSuccesses = (rollResults: number[], diceType: DiceEnum = DiceEnum
 export const printRollResult = (diceResult: DiceResult) => {
     if (diceResult.successes >= 0) {
         return `
+        Anzahl: ${diceResult.rolls.length } D${diceResult.diceType}
         Würfel-Ergebnis: ${diceResult.rolls}
         Erfolge: ${diceResult.successes}
         `;
     } else {
         return `
+        Anzahl: ${diceResult.rolls.length } D${diceResult.diceType}
         Würfel-Ergebnis: ${diceResult.rolls}
         `;  
     }
