@@ -9,8 +9,8 @@
     "node": ">=18.x"
   },
   "scripts": {
-    "start": "npx tsx app.ts",
-    "register": "npx tsx commands.ts",
+    "start": "npx tsx src/app.ts",
+    "register": "npx tsx src/commands.ts",
     "lint": "npx eslint"
   },
   "author": "Luca Camastro",

@@ -1,6 +1,9 @@
 import { ATK_DIFFICULTY, ATK_ENEMYSELECTION, ATK_SUBMIT, ATK_VALUE } from "../constants/constants";
 import AtkModel from '../../mongodb/schema/atkSchema'
 import { enemies } from "../../options/enemies";
+import { roll } from "./roll";
+import { DiceEnum } from "../enums/diceEnum";
+import { DiceResult } from "../types/DiceResult";
 
 export const handleAtkMessageComponent = async (custom_id: string, values: string[]): Promise<string | undefined> => {
 
@@ -17,33 +20,38 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         const difficulty = atkModel?.Atk_Difficulty ?? 0;
 
         // roll
-        const rollResults = new Array<number>();
-        let successes = 0;
+        // const rollResults = new Array<number>();
+        // let successes = 0;
         const atkVal = atkModel?.Atk_Value ?? 0;
-        console.log("atkVal", atkVal);
+        // console.log("atkVal", atkVal);
+
+        const rollResult: DiceResult = roll(atkVal, DiceEnum.D10);
 
 
-        for (let i = 0; i < atkVal; i++) {
-            const rollResult = Math.floor((Math.random() * 10) + 1);
-            if (rollResult === 10) {
-                successes += 2;
-            } else if (rollResult >= 7) {
-                successes += 1;
-            }
-            rollResults.push(rollResult);
-        }
+        // for (let i = 0; i < atkVal; i++) {
+        //     const rollResult = Math.floor((Math.random() * 10) + 1);
+        //     if (rollResult === 10) {
+        //         successes += 2;
+        //     } else if (rollResult >= 7) {
+        //         successes += 1;
+        //     }
+        //     rollResults.push(rollResult);
+        // }
 
         // calc if hit or miss against the enemy
 
         // TODO: check for parryDV also
-        const hitValue = successes - (enemy!.dodgeDV + difficulty);
+
+        // TODO: patzer?
+
+        const hitValue = rollResult.successes - (enemy!.dodgeDV + difficulty);
         const hit = hitValue > 0;
 
         console.log("ATK-Calculation DEBUG VALUES");
         console.log("difficulty", difficulty);
         console.log("enemy!.dodgeDV", enemy!.dodgeDV);
-        console.log("rollResults", rollResults);
-        console.log("successes", successes);
+        console.log("rollResults", rollResult.rolls);
+        console.log("successes", rollResult.successes);
         console.log("hitValue", hitValue);
         console.log("hit", hit);
 
@@ -56,8 +64,8 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         const hitExtraSuccesses = hitValue > 0 ? hitValue : "Keine";
         const returnText = 
         `
-        Würfel-Ergebnis: ${rollResults}
-        Erfolge: ${successes}
+        Würfel-Ergebnis: ${rollResult.rolls}
+        Erfolge: ${rollResult.successes}
         
         Du hast ${hitText}!
         ${hitExtraSuccesses} überschüssige Erfolge

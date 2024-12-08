@@ -27,8 +27,8 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async fu
 
   if (type === InteractionType.APPLICATION_COMMAND) {
     // data.options
-    handleApplicationCommand(data.name, data.options);
-    sendObj = getCommandSendObject(data.name);
+    const result = handleApplicationCommand(data.name, data.options);
+    sendObj = getCommandSendObject(data.name, result);
   }
 
   if (type === InteractionType.MESSAGE_COMPONENT) {
