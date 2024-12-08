@@ -7,7 +7,6 @@ import {
 } from 'discord-interactions';
 import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler';
 import mongoose from 'mongoose';
-import { AtkResult } from './scripts/types/AtkResult';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +17,6 @@ mongoose.connect('mongodb://localhost/scRoll', {})
 
 app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async function (req, res) {
 
-  // SessionHandler.setSession(req.session);
   const { type, data } = req.body;
 
   let sendObj: unknown = null;
@@ -38,9 +36,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async fu
     const result = await handleMessageComponent(data.custom_id, data.values);
     sendObj = getMessageComponentSendObj(data.custom_id, result);
   }
-
-  // req.session = SessionHandler.getSession();
-  // req.session.save();
 
   if (sendObj) {
     return res.send(sendObj);

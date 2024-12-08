@@ -46,7 +46,7 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         console.log("hit", hit);
 
         // todo: now clear db again?
-        // await AtkModel.findOneAndDelete();
+        await AtkModel.findOneAndDelete();
 
         // show/return to user the roll result + calcResult
         // return { hit, successes, rollResults } as AtkResult;
