@@ -8,9 +8,7 @@ import { DiceResult } from "../types/DiceResult";
 export const handleAtkMessageComponent = async (custom_id: string, values: string[]): Promise<string | undefined> => {
 
     if (custom_id === ATK_SUBMIT) {
-        // TODO: handle submit
 
-        // get vals from db
         const atkModel = await AtkModel.findOne();
         
         // TODO: allow/ update to multiple enemies
@@ -18,48 +16,19 @@ export const handleAtkMessageComponent = async (custom_id: string, values: strin
         const enemy = enemies.find(e => e.id === enemyLabel);
 
         const difficulty = atkModel?.Atk_Difficulty ?? 0;
-
-        // roll
-        // const rollResults = new Array<number>();
-        // let successes = 0;
         const atkVal = atkModel?.Atk_Value ?? 0;
-        // console.log("atkVal", atkVal);
 
         const rollResult: DiceResult = roll(atkVal, DiceEnum.D10);
 
-
-        // for (let i = 0; i < atkVal; i++) {
-        //     const rollResult = Math.floor((Math.random() * 10) + 1);
-        //     if (rollResult === 10) {
-        //         successes += 2;
-        //     } else if (rollResult >= 7) {
-        //         successes += 1;
-        //     }
-        //     rollResults.push(rollResult);
-        // }
-
-        // calc if hit or miss against the enemy
-
         // TODO: check for parryDV also
-
         // TODO: patzer?
 
         const hitValue = rollResult.successes - (enemy!.dodgeDV + difficulty);
         const hit = hitValue > 0;
 
-        console.log("ATK-Calculation DEBUG VALUES");
-        console.log("difficulty", difficulty);
-        console.log("enemy!.dodgeDV", enemy!.dodgeDV);
-        console.log("rollResults", rollResult.rolls);
-        console.log("successes", rollResult.successes);
-        console.log("hitValue", hitValue);
-        console.log("hit", hit);
-
         // todo: now clear db again?
         await AtkModel.findOneAndDelete();
 
-        // show/return to user the roll result + calcResult
-        // return { hit, successes, rollResults } as AtkResult;
         const hitText = hit ? "getroffen" : "verfehlt";
         const hitExtraSuccesses = hitValue > 0 ? hitValue : "Keine";
         const returnText = 

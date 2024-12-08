@@ -84,8 +84,6 @@ export function getAtkMessageComponent() {
                         "custom_id": ATK_DIFFICULTY,
                         "options": difficultyList,
                         "placeholder": "Schwierigkeit",
-                        // "min_values": 1,
-                        // "max_values": 1
                     }
                 ]
             },
