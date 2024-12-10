@@ -11,7 +11,8 @@ import mongoose from 'mongoose';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/scRoll', {})
+// mongoose.connect('mongodb://localhost/scRoll', {})
+mongoose.connect('mongodb://mongodb/scRoll', {})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
