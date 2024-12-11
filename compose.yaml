@@ -1,21 +1,21 @@
 services:
   bot:
-    env_file:
-      - .env.production
+    depends_on: mongodb
+    networks: scroll_network
     restart: unless-stopped
     build:
       context: .
-    environment:
-      APP_ID: ${APP_ID}
-      DISCORD_TOKEN: ${DISCORD_TOKEN}
-      PUBLIC_KEY: ${PUBLIC_KEY}
-      SESSION_SECRET: ${SESSION_SECRET}
     ports:
       - 3000:3000
 
   mongodb:
-    image: mongo
+    image: mongo:latest
     container_name: mongodb
+    networks: scroll_network
     restart: unless-stopped
     ports:
       - "27017:27017"
+
+networks:
+  scroll_network:
+    driver: bridge
