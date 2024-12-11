@@ -31,6 +31,7 @@ USER node
 
 # Copy the rest of the source files into the image.
 COPY . .
+COPY .env.production .env
 
 # Expose the port that the application listens on.
 EXPOSE 3000
