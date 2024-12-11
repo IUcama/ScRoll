@@ -9,8 +9,8 @@
 # https://github.com/docker/awesome-compose
 services:
   bot:
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     restart: unless-stopped
     build:
       context: .
