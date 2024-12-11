@@ -1,0 +1,21 @@
+services:
+  bot:
+    depends_on: mongodb
+    networks: scroll_network
+    restart: unless-stopped
+    build:
+      context: .
+    ports:
+      - 3000:3000
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    networks: scroll_network
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+
+networks:
+  scroll_network:
+    driver: bridge
