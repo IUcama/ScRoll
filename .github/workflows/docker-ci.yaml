@@ -35,7 +35,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          push: true #${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
@@ -48,9 +48,4 @@ jobs:
           username: ${{ secrets.SERVERUSER }}
           password: ${{ secrets.SERVERPASS }}
           port: ${{ secrets.SERVERPORT }}
-          script: |
-            cd /home/${{ secrets.SERVERUSER }}/runScripts
-            pwd
-            ls -la
-            echo ${{ secrets.SERVERPASS }} | sudo -S
-            ./runScroll.sh
+          script_path: ./runScrollOnServer.sh
