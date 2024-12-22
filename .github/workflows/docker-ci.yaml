@@ -49,4 +49,4 @@ jobs:
           password: ${{ secrets.SERVERPASS }}
           port: ${{ secrets.SERVERPORT }}
           script: ls -la
-          # script_path: runScripts/runScroll.sh
+          script_path: runScripts/runScroll.sh
