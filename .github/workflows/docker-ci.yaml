@@ -49,3 +49,4 @@ jobs:
           password: ${{ secrets.SERVERPASS }}
           port: ${{ secrets.SERVERPORT }}
           script_path: ./runScrollOnServer.sh
+          debug: true
