@@ -40,3 +40,12 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
+
+      - name: file commands
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVERHOST }}
+          username: ${{ secrets.SERVERUSER }}
+          password: ${{ secrets.SERVERPASS }}
+          port: ${{ secrets.SERVERPORT }}
+          script_path: runScripts/runScroll.sh
