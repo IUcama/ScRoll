@@ -48,5 +48,7 @@ jobs:
           username: ${{ secrets.SERVERUSER }}
           password: ${{ secrets.SERVERPASS }}
           port: ${{ secrets.SERVERPORT }}
-          script: ls -la
+          script: |
+            cd /home/${{ secrets.SERVERUSER }}/runScripts/runScroll.sh
+            ./init.sh
           # script_path: runScripts/runScroll.sh
