@@ -50,4 +50,6 @@ jobs:
           port: ${{ secrets.SERVERPORT }}
           script: |
             cd /home/${{ secrets.SERVERUSER }}/runScripts
+            pwd
+            echo ${{ secrets.SERVERPASS }} | sudo -S
             ./runScroll.sh
