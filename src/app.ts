@@ -7,11 +7,19 @@ import {
 } from 'discord-interactions';
 import { handleApplicationCommand, handleMessageComponent, getCommandSendObject, getMessageComponentSendObj } from './scripts/handler/commandHandler';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import https from 'https';
 
+const credentials = {
+  key: fs.readFileSync(process.env.SSLKEYPATH!, 'utf8'), 
+  cert: fs.readFileSync(process.env.SSLCERTPATH!, 'utf8'),
+  passphrase: process.env.SSLPASSPHRASE,
+};
 const app = express();
 const PORT = process.env.PORT || 3000;
+const httpsServer = https.createServer(credentials, app);
 
-mongoose.connect('mongodb://localhost/scRoll', {})
+mongoose.connect('mongodb://mongodb/scRoll', {})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
@@ -45,6 +53,4 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY!), async fu
   }
 });
 
-app.listen(PORT, () => {
-  console.log('Listening on port', PORT);
-});
+httpsServer.listen(PORT);
