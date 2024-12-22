@@ -40,16 +40,6 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: true
           sbom: true
-
-      - name: Upload Production-environment-file to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVERHOST }}
-          username: ${{ secrets.SERVERUSER }}
-          password: ${{ secrets.SERVERPASS }}
-          port: ${{ secrets.SERVERPORT }}
-          source: "./deployment/.env.production"
-          target: "/home/luca/.env.scroll"
           
       - name: Update Docker image on Server
         uses: appleboy/ssh-action@v1.2.0
@@ -58,4 +48,9 @@ jobs:
           username: ${{ secrets.SERVERUSER }}
           password: ${{ secrets.SERVERPASS }}
           port: ${{ secrets.SERVERPORT }}
+          envs:
+            APP_ID: ${{ secrets.SCROLL_PROD_APP_ID }}
+            DISCORD_TOKEN: ${{ secrets.SCROLL_PROD_DISCORD_TOKEN }}
+            PUBLIC_KEY: ${{ secrets.SCROLL_PROD_PUBLIC_KEY }}
+            SESSION_SECRET: ${{ secrets.SCROLL_PROD_SESSION_SECRET }}
           script_path: ./deployment/runScrollOnServer.sh
